@@ -1,18 +1,19 @@
 import React, { useState } from 'react'
 import assets from '../assets/assets'
+import ThemeToggle from './ThemeToggle'
 
 const Navbar = ({theme, setTheme}) => {
     const [sidebarOpen, setSidebarOpen] = useState(false)
   return (
-    <div className='flex justify-between items-center px-4 sm:px-12
+    <div className={`flex justify-between items-center px-4 sm:px-12
     lg:px-24 xl:px-40 py-4 sticky top-0 z-20
-    font-medium bg-white'>
+    font-medium ${theme === 'dark' ? 'bg-[#1a1a2e]' : 'bg-white'}`}>
         <img src={theme === 'dark' ? assets.logo_dark : assets.logo }
         className='w-32 sm:w-40' alt=""/>
 
         <div
   className={`
-    text-gray-700 sm:text-sm
+    ${theme === 'dark' ? 'text-white' : 'text-gray-700'} sm:text-sm
     flex sm:items-center gap-5
     transition-all
     top-0 bottom-0 right-0
@@ -25,13 +26,15 @@ const Navbar = ({theme, setTheme}) => {
         <img src={assets.close_icon} className='w-5 absolute right-4 top-4 sm:hidden'
         onClick={() => setSidebarOpen(false)}/>
 
-            <a onClick={() => setSidebarOpen(false)} href='#' className='hover:border-b border-gray-700'>Home</a>
-            <a onClick={() => setSidebarOpen(false)} href='#services' className='hover:border-b border-gray-700'>Services</a>
-            <a onClick={() => setSidebarOpen(false)} href='#our-work' className='hover:border-b border-gray-700'>Our Work</a>
-            <a onClick={() => setSidebarOpen(false)} href='#contact-us' className='hover:border-b border-gray-700'>Contact Us</a>
+            <a onClick={() => setSidebarOpen(false)} href='#' className={`hover:border-b ${theme === 'dark' ? 'border-white' : 'border-gray-700'}`}>Home</a>
+            <a onClick={() => setSidebarOpen(false)} href='#services' className={`hover:border-b ${theme === 'dark' ? 'border-white' : 'border-gray-700'}`}>Services</a>
+            <a onClick={() => setSidebarOpen(false)} href='#our-work' className={`hover:border-b ${theme === 'dark' ? 'border-white' : 'border-gray-700'}`}>Our Work</a>
+            <a onClick={() => setSidebarOpen(false)} href='#contact-us' className={`hover:border-b ${theme === 'dark' ? 'border-white' : 'border-gray-700'}`}>Contact Us</a>
         </div>
 
         <div className='flex items-center gap-2 sm:gap-4'>
+
+            <ThemeToggle theme={theme} setTheme={setTheme}/>
 
             <img src={theme === 'dark' ? assets.menu_icon_dark : assets.menu_icon} alt=""
             onClick={() => setSidebarOpen(true)} className='w-8 sm:hidden'/>
@@ -40,7 +43,7 @@ const Navbar = ({theme, setTheme}) => {
             gap-2 bg-primary text-white px-6 py-2 rounded-full cursor-pointer hover:scale-103 transition-all'>
                 Connect<img src={assets.arrow_icon} width={14}/></a>
         </div>
-      
+
     </div>
   )
 }
